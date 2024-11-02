@@ -1,29 +1,24 @@
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="login.component.css">
-</head>
-<body>
-  <div class="container">
-    <header class="header">
-      <button class="back-button">BACK</button>
-      <div class="logo">RC</div>
-    </header>
+<div class="font-bold text-3xl top-0 left-0 fixed bg-[#00ccff] w-screen p-2 flex justify-between items-center">
+  <button class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 text-left">
+    BACK
+  </button>
+  <h1 class="text-3xl font-bold underline text-right">
+    RC
+  </h1>
+</div>
 
-    <div class="login-box">
-      <img src="user-icon.png" alt="User Icon" class="user-icon">
-      <form>
-        <label for="username">Usuario:</label>
-        <input type="text" id="username" placeholder="Usuario">
-        
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" placeholder="Contraseña">
+<div class="flex items-center justify-center h-screen">
+  <div class="bg-fuchsia-600 max-w-md w-full rounded-lg p-5 text-black shadow-lg">
+    <form>
+      <label for="username" class="block mb-2">Usuario:</label>
+      <input type="text" id="username" placeholder="Usuario" class="w-full p-2 rounded border border-gray-300 mb-4">
 
-        <button type="submit" class="login-button">Log In</button>
-        <p class="signup-text">Si no tienes cuenta crea una:</p>
-        <button type="button" class="signup-button">Sign Up</button>
-      </form>
-    </div>
+      <label for="password" class="block mb-2">Contraseña:</label>
+      <input type="password" id="password" placeholder="Contraseña" class="w-full p-2 rounded border border-gray-300 mb-4">
+
+      <button type="submit" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400 mb-2">Log In</button>
+      <p class="text-center mb-2">Si no tienes cuenta crea una:</p>
+      <button type="button" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400">Sign Up</button>
+    </form>
   </div>
-</body>
+</div>
