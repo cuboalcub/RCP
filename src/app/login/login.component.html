@@ -1,24 +1,56 @@
-<div class="font-bold text-3xl top-0 left-0 fixed bg-[#00ccff] w-screen p-2 flex justify-between items-center">
-  <button class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 text-left">
-    BACK
-  </button>
-  <h1 class="text-3xl font-bold underline text-right">
-    RC
-  </h1>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login  </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Asegura que el fondo ocupe toda la pantalla */
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+  </style>
+</head>
+<body class="h-full w-full bg-cover bg-center" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2FWhatsApp%20Image%202024-10-31%20at%2010.01.29%20AM(1).jpeg?alt=media&token=a2280576-d4e4-4e01-bec8-38b861faae56');">
 
-<div class="flex items-center justify-center h-screen">
-  <div class="bg-fuchsia-600 max-w-md w-full rounded-lg p-5 text-black shadow-lg">
-    <form>
-      <label for="username" class="block mb-2">Usuario:</label>
-      <input type="text" id="username" placeholder="Usuario" class="w-full p-2 rounded border border-gray-300 mb-4">
-
-      <label for="password" class="block mb-2">Contraseña:</label>
-      <input type="password" id="password" placeholder="Contraseña" class="w-full p-2 rounded border border-gray-300 mb-4">
-
-      <button type="submit" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400 mb-2">Log In</button>
-      <p class="text-center mb-2">Si no tienes cuenta crea una:</p>
-      <button type="button" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400">Sign Up</button>
-    </form>
+  <!-- Barra superior -->
+  <div class="fixed top-0 left-0 w-full bg-gradient-to-r from-purple-500 to-green-500 p-4 flex items-center justify-center border-b-2 border-black z-10">
+    <!-- Logo centrado -->
+    <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fcanvas.png?alt=media&token=266cc22d-53b5-44f8-963d-0a0ab0e556cb" alt="Logo" class="h-16"> <!-- Tamaño ajustado a h-16 -->
   </div>
-</div>
+
+  <!-- Botón BACK debajo de la barra superior en el lado izquierdo -->
+  <div class="flex justify-start">
+    <button class="absolute top-20 left-4 bg-yellow-400 text-black px-4 py-2 rounded-md font-bold shadow-md hover:bg-yellow-500 z-10">
+      BACK
+    </button>
+  </div>
+
+  <!-- Contenedor principal con el formulario centrado -->
+<div class="flex items-center justify-center h-full pt-20"> <!-- pt-20 para evitar que el formulario quede debajo de la barra -->
+    <div class="bg-white bg-opacity-0 max-w-md w-full rounded-lg p-5 text-black shadow-lg">
+      <!-- Ícono de usuario -->
+      <div class="flex justify-center mb-5">
+        <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fimages-removebg-preview.png?alt=media&token=b3c8b16c-332f-49af-8048-df25b6865ef8" alt="Ícono de usuario" class="w-28 h-28 rounded-full border-4 border-gray-200 shadow-md">
+      </div>
+      
+      <!-- Formulario -->
+      <form>
+        <label for="username" class="block mb-2 text-white">Usuario:</label>
+        <input type="text" id="username" placeholder="Usuario" class="w-full p-2 rounded border border-gray-300 mb-4">
+  
+        <label for="password" class="block mb-2 text-white">Contraseña:</label>
+        <input type="password" id="password" placeholder="Contraseña" class="w-full p-2 rounded border border-gray-300 mb-4">
+  
+        <button type="submit" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400 mb-2">Log In</button>
+        <p class="text-center mb-2 text-white">Si no tienes cuenta crea una:</p>
+        <button type="button" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400">Sign Up</button>
+      </form>
+    </div>
+  </div>
+  
+
+</body>
+</html>
