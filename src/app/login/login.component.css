@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background: url('fondo.jpeg') no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: white;
+  }
+  .back-button-container {
+    position: fixed;
+    top: 60px; /* Ajusta según la altura del header */
+    left: 20px; /* Espaciado desde el borde izquierdo */
+  }
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #9900ff, #00ccff);
+    z-index: 1000; /* Asegura que esté encima de otros elementos */
+  }
+  
+  
+  .back-button {
+    background-color: #ffcc00;
+    color: black;
+    border: none;
+    border-radius: 30%; /* Hace el botón circular */
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 2px 2px 10px        rgba(251, 255, 0, 0.7);
+    font-size: 14px;
+    width: 80px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 5px black;
+  }
+  
+  .login-box {
+    border-radius: 10px;
+    padding: 40px 30px;
+    text-align: center;
+    width: 300px;
+    margin-top: 20px;
+  }
+  
+  .user-icon {
+    width: 80px;
+    margin-bottom: 20px;
+  }
+  
+  form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  form input[type="text"],
+  form input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .login-button,
+  .signup-button {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .login-button {
+    background-color: #e0e0e0;
+    color: black;
+  }
+  
+  .signup-button {
+    background-color: #e0e0e0;
+    color: black;
+    margin-top: 10px;
+  }
+  
+  .signup-text {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
