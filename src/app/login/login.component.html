@@ -7,7 +7,9 @@
   </div>
 
   <!-- Botón BACK -->
-  <button class="absolute top-[150px]  bg-yellow-400 text-black px-4 py-2 rounded-md font-bold shadow-md hover:bg-yellow-500 z-10 left-[100px]">
+  <button 
+  (click)="goBack()"
+  class="absolute top-[150px]  bg-yellow-400 text-black px-4 py-2 rounded-md font-bold shadow-md hover:bg-yellow-500 z-10 left-[100px]">
     BACK
   </button>
 
@@ -20,14 +22,20 @@
       
       <form>
         <label for="username" class="block mb-2 text-white">Usuario:</label>
-        <input type="text" id="username" placeholder="Usuario" class="w-full p-2 rounded border border-gray-300 mb-4">
+        <input [(ngModel)]="username" type="text" id="username" placeholder="Usuario" class="w-full p-2 rounded border border-gray-300 mb-4">
   
         <label for="password" class="block mb-2 text-white">Contraseña:</label>
-        <input type="password" id="password" placeholder="Contraseña" class="w-full p-2 rounded border border-gray-300 mb-4">
+        <input 
+        [(ngModel)]="password"
+        type="password" id="password" placeholder="Contraseña" class="w-full p-2 rounded border border-gray-300 mb-4">
   
-        <button type="submit" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400 mb-2">Log In</button>
+        <button type="submit" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400 mb-2"
+        (click)="goLogin()"
+        >Log In</button>
         <p class="text-center mb-2 text-white">Si no tienes cuenta crea una:</p>
-        <button type="button" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400">Sign Up</button>
+        <button type="button" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400"
+        (click)="goSignUp()"
+        >Sign Up</button>
       </form>
     </div>
   </div>
