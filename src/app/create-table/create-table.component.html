@@ -1,0 +1,29 @@
+<div class="fixed top-0 left-0 w-full bg-gradient-to-r from-purple-500 to-green-500 p-4 flex items-center justify-center border-b-2 border-black z-10">
+    <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fcanvas.png?alt=media&token=266cc22d-53b5-44f8-963d-0a0ab0e556cb" alt="Logo" class="h-16">
+</div>
+
+<div class="container">
+    <h2>Ingresa los datos necesarios a tu tabla</h2>
+    <table>
+        <thead>
+          <tr>
+            <th>Actividad</th>
+            <th>MP</th>
+            <th>O</th>
+            <th>P</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of rows" class="row">
+            <td><input type="text" placeholder="Actividad" [(ngModel)]="row.actividad"></td>
+            <td><input type="text" placeholder="MP" [(ngModel)]="row.mp"></td>
+            <td><input type="text" placeholder="O" [(ngModel)]="row.o"></td>
+            <td><input type="text" placeholder="P" [(ngModel)]="row.p"></td>
+            <td><button class="add-row">+</button></td>
+            <td><button class="remove-row">-</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="save">GUARDAR</button>
+      
+</div>
