@@ -1,0 +1,84 @@
+<!-- Barra superior -->
+<div class="fixed top-0 left-0 w-full bg-gradient-to-r from-purple-500 to-green-500 p-4 flex items-center justify-center border-b-2 border-black z-10">
+    <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fcanvas.png?alt=media&token=266cc22d-53b5-44f8-963d-0a0ab0e556cb" alt="Logo" class="h-16">
+</div>
+
+<body class="h-full w-full bg-gray-100 pt-20">
+    <div class="container mx-auto p-4">
+        <div class="fixed top-0 w-full p-4 flex justify-between"></div>
+
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Agregar</button>
+
+        <!-- Menú Usuario -->
+        <div class="relative inline-block">
+            <button id="userButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Usuario</button>
+            <div id="logoutMenu" class="hidden absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg">
+                <button class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="logOut()">LogOut</button>
+            </div>
+        </div>
+
+        <h1 class="text-3xl font-bold mb-4">Mi Tabla de Datos</h1>
+
+        <table class="min-w-full border">
+            <thead>
+                <tr>
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Óptimo</th>
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Probable</th>
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Pésimo</th>
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Ver</th>
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Editar</th>
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">Nombre 1</td>
+                    <td class="px-6 py-4 whitespace-nowrap">Valor 1</td>
+                    <td class="px-6 py-4 whitespace-nowrap">Valor 2</td>
+                    <td class="px-6 py-4 whitespace-nowrap">Valor 3</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2FSin_t%C3%ADtulo-removebg-preview.png" alt="Icono de ojo" class="w-12 h-12">
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fimagsadasdaes-removebg-preview.png" alt="Icono de lápiz" class="w-10 h-10">
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fimagsadasdaes-removebg-preview.png" alt="Icono de eliminar" class="w-10 h-10">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userButton = document.getElementById('userButton');
+            const logoutMenu = document.getElementById('logoutMenu');
+    
+            if (!userButton || !logoutMenu) {
+                console.error('Error: No se encontró el botón o el menú.');
+                return;
+            }
+    
+            userButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                logoutMenu.classList.toggle('hidden');
+                console.log('Menu toggled:', logoutMenu.classList.contains('hidden') ? 'Oculto' : 'Visible');
+            });
+    
+            document.addEventListener('click', () => {
+                if (!logoutMenu.classList.contains('hidden')) {
+                    logoutMenu.classList.add('hidden');
+                    console.log('Menu oculto automáticamente');
+                }
+            });
+        });
+    
+        function logOut() {
+            console.log('LogOut ejecutado.');
+            alert('Has cerrado sesión.');
+        }
+    </script>
+    
+</body>
