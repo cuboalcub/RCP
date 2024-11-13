@@ -1,6 +1,6 @@
     import { Injectable } from '@angular/core';
     import { HttpClient } from '@angular/common/http';
-    import { API_ROUTES } from '../API-Routes';
+    import { API_ROUTES } from '../../API-Routes';
     @Injectable({
       providedIn: 'root'
     })

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,18 +14,28 @@ import { Router, RouterModule } from '@angular/router';
 export class LoginComponent {
   username: string = "";
   password: string = "";
-  constructor(private router: Router) { }
+
+  constructor(private loginService: LoginService, private router: Router) { }
 
   goBack() {
     this.router.navigate(['/']);
   }
 
   goLogin() {
-    
+    alert(this.username);
+    alert(this.password);
+    this.loginService.login(this.username, this.password).subscribe(
+      () => {
+        alert(" éxito");
+      },
+      (error) => {
+        alert("Error en la cuenta");  
+        console.log(error);
+      }
+    );
   }
 
   goSignUp() {
     this.router.navigate(['/signup']);
   }
-
 }

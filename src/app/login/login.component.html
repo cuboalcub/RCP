@@ -20,22 +20,37 @@
         <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fimages-removebg-preview.png?alt=media&token=b3c8b16c-332f-49af-8048-df25b6865ef8" alt="Ícono de usuario" class="w-28 h-28 rounded-full border-4 border-gray-200 shadow-md">
       </div>
       
-      <form>
+      <form (submit)="goLogin()">
         <label for="username" class="block mb-2 text-white">Usuario:</label>
-        <input [(ngModel)]="username" type="text" id="username" placeholder="Usuario" class="w-full p-2 rounded border border-gray-300 mb-4">
-  
+        <input 
+          [(ngModel)]="username" 
+          name="username" 
+          type="text" 
+          id="username" 
+          placeholder="Usuario" 
+          class="w-full p-2 rounded border border-gray-300 mb-4">
+        
         <label for="password" class="block mb-2 text-white">Contraseña:</label>
         <input 
-        [(ngModel)]="password"
-        type="password" id="password" placeholder="Contraseña" class="w-full p-2 rounded border border-gray-300 mb-4">
-  
-        <button type="submit" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400 mb-2"
-        (click)="goLogin()"
-        >Log In</button>
-        <p class="text-center mb-2 text-white">Si no tienes cuenta crea una:</p>
-        <button type="button" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400"
-        (click)="goSignUp()"
-        >Sign Up</button>
+          [(ngModel)]="password" 
+          name="password" 
+          type="password" 
+          id="password" 
+          placeholder="Contraseña" 
+          class="w-full p-2 rounded border border-gray-300 mb-4">
+        
+        <button 
+          type="submit" 
+          class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400 mb-2">
+          Log In
+        </button>
+        <p class="text-center mb-2 text-white">
+          Si no tienes cuenta crea una:
+        </p>
+        <button (click)="goSignUp()" class="w-full p-2 rounded bg-gray-300 text-black font-bold hover:bg-gray-400">
+          Sign Up
+
+        </button>
       </form>
     </div>
   </div>
