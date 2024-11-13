@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { SignupService } from '../services/signup.service';
+import { SignupService } from '../app/services/signup.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './sign-up.component.html',  // Asegúrate de que este archivo exista
+  templateUrl: './sign-up.component.html',  
 })
 export class SignUpComponent { 
   username: string = "";
