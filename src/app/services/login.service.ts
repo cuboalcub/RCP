@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_ROUTES } from '../../API-Routes';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,17 @@ export class LoginService {
 
   login(username: string, password: string) {
     const data = { username, password };
-    console.log(data);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    
-    // Retorna el observable para que el componente se suscriba
+
     return this.http.post<{ access: string, refresh: string }>(
       this.baseUrl + API_ROUTES.user.login,
       data,
       { headers }
+    ).pipe(
+      tap(tokens => {
+        localStorage.setItem('access_token', tokens.access);
+        localStorage.setItem('refresh_token', tokens.refresh);
+      })
     );
   }
 }

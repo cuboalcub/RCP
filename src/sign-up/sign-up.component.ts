@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SignupService } from '../app/services/signup.service';
+import { MediaRCP } from '../MediaForRCP/MediaRCP';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,7 +16,7 @@ export class SignUpComponent {
   password: string = "";
   confirmPassword: string = "";
   email: string = "";
-
+  Media: typeof MediaRCP = MediaRCP;
   constructor(private signupService: SignupService, private router: Router) { }
 
   signup() {
@@ -29,5 +30,9 @@ export class SignUpComponent {
         console.log(error);
       }
     );
+  }
+
+  goBack() {
+    this.router.navigate(['/']);
   }
 }

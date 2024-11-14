@@ -19,7 +19,7 @@
 
         <h1 class="text-3xl font-bold mb-4">Mi Tabla de Datos</h1>
 
-        <table class="min-w-full border">
+        <table class="w-full h-full table-auto">
             <thead>
                 <tr>
                     <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
@@ -32,19 +32,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">Nombre 1</td>
-                    <td class="px-6 py-4 whitespace-nowrap">Valor 1</td>
-                    <td class="px-6 py-4 whitespace-nowrap">Valor 2</td>
-                    <td class="px-6 py-4 whitespace-nowrap">Valor 3</td>
+                <tr *ngFor="let elemento of datosTabla">
+                    <td class="px-6 py-4 whitespace-nowrap">{{elemento.nombre}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{elemento.optimo}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{elemento.probable}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{elemento.pesimo}}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2FSin_t%C3%ADtulo-removebg-preview.png" alt="Icono de ojo" class="w-12 h-12">
+                        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2FSin_t%C3%ADtulo-removebg-preview.png" alt="Icono de ojo" class="w-12 h-12"> -->
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fimagsadasdaes-removebg-preview.png" alt="Icono de lápiz" class="w-10 h-10">
+                        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fimagsadasdaes-removebg-preview.png" alt="Icono de lápiz" class="w-10 h-10"> -->
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fimagsadasdaes-removebg-preview.png" alt="Icono de eliminar" class="w-10 h-10">
+                        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fimagsadasdaes-removebg-preview.png" alt="Icono de eliminar" class="w-10 h-10"> -->
                     </td>
                 </tr>
             </tbody>

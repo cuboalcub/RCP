@@ -3,5 +3,11 @@ export const API_ROUTES = {
     user:{
         login:'/user/login',
         signup:'/user/signup',
+    },
+    project:{
+        view:'project/view',
+        add:'project/add',
+        edit:'project/edit',
+
     }
 }
