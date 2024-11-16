@@ -32,7 +32,7 @@
            
         </div>
 
-    <h1 class="text-3xl font-bold mb-4 text-center mt-0 mb-5    ">Tabla de Proyectos</h1>
+    <h1 class="text-3xl font-bold mb-4 text-center mt-0">Tabla de Proyectos</h1>
 
         <div class="overflow-y-auto max-h-96">
 
@@ -76,38 +76,6 @@
     </div>
     </div>
 
-    <script>
-
-document.addEventListener("DOMContentLoaded", function() {
-        // Usamos delegación de eventos para manejar clics en botones de eliminar
-        const tableBody = document.querySelector("tbody"); // Selecciona el tbody donde están las filas
-
-        tableBody.addEventListener("click", function(event) {
-            if (event.target.closest(".deleteButton")) {
-                // Encuentra la fila (tr) más cercana al botón y la elimina
-                const row = event.target.closest("tr");
-                if (row) {
-                    row.remove();
-                }
-            }
-        });
-    });
-
-
-        document.getElementById("userButton").addEventListener("click", function(event) {
-            event.preventDefault(); // Prevenir comportamiento predeterminado
-            document.getElementById("logoutMenu").classList.toggle("hidden");
-        });
-    
-        document.addEventListener("click", function(event) {
-            const userButton = document.getElementById("userButton");
-            const logoutMenu = document.getElementById("logoutMenu");
-    
-            if (!userButton.contains(event.target) && !logoutMenu.contains(event.target)) {
-                logoutMenu.classList.add("hidden");
-            }
-        });
-    </script>
     
     
 </body>
