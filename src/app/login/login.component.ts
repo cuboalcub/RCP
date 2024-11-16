@@ -22,8 +22,6 @@ export class LoginComponent {
   }
 
   goLogin() {
-    alert(this.username);
-    alert(this.password);
     this.loginService.login(this.username, this.password).subscribe(
       () => {
         alert(" éxito");

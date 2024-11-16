@@ -14,6 +14,6 @@ export class HomeComponent {
   constructor(private homeService: HomeService) { }
 
   ngOnInit() {
-    this.homeService.viewTable()
+    this.homeService.viewTable();
   }
 }

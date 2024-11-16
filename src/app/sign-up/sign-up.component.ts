@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SignupService } from '../app/services/signup.service';
-import { MediaRCP } from '../MediaForRCP/MediaRCP';
+import { SignupService } from '../services/signup.service';
+import { MediaRCP } from '../../MediaForRCP/MediaRCP';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
