@@ -6,13 +6,6 @@ import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
     {path:"/home", component: HomeComponent},
-
-
-
-
-
-
-
     {path:"", component: LandingComponent},
     {path: 'login', component: LoginComponent},
   { path: 'signup', component: SignUpComponent }, // Ruta para el componente de registro
