@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup with Tailwind CSS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilo personalizado para el texto con efecto 3D */
+        .text-3d {
+            font-family: 'Arial Black', sans-serif;
+            text-shadow: 4px 4px 0 #000000;
+            color: #ffffff;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .main-circle {
+            width: 1300px; /* Ajusta el tamaño de la esfera */
+            height: 670px;
+            background-color: #f2f2f2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            margin-left: -27rem; /* Ajuste para mover la esfera más a la izquierda */
+        }
+    </style>
+</head>
+<body class="bg-white font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-gradient-to-r from-purple-600 via-blue-500 to-teal-400 p-4 flex justify-between items-center">
+        <!-- Logo en la barra de navegación -->
+        <div class="flex-grow flex justify-center">
+            <img src="{{Media.logo}}" alt="RC Logo Navbar" class="w-32 h-32 object-contain"> <!-- Aumenta el tamaño del logo en la barra de navegación -->
+        </div>
+        
+        <!-- Botones -->
+        <div class="space-x-4">
+            <button class="bg-white text-teal-500 px-4 py-2 rounded-lg hover:bg-teal-500 hover:text-white transition">
+                Log In
+            </button>
+            <button class="bg-purple-700 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-purple-700 transition">
+                Sign Up
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sección Principal -->
+    <section class="flex items-center justify-start mt-16 max-w-5xl mx-auto">
+        <!-- Logo Circular a la Izquierda -->
+        <div class="main-circle mr-8">
+            <img src="{{Media.logo}}" alt="RC Logo" class="w-89 h-89 object-contain"> <!-- Aumenta el tamaño del logo en la esfera -->
+        </div>
+
+        <!-- Texto Principal a la   Izquierda -->
+        <div class="text-left flex-grow mr-8"> <!-- Añadido flex-grow para ocupar el espacio restante -->
+            <p class="text-5xl text-3d leading-tight">
+                ACCELERATING YOUR PROJECT'S<br> SUCCESS, STEP BY STEP
+            </p>
+        </div>
+
+    </section>
+
+</body>
+</html>
