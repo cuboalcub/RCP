@@ -1,6 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { Router } from '@angular/router';
+import { HomeService } from '../services/home.service';
+import { Project } from '../models/project/project.modelo';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -8,21 +10,29 @@ import { CommonModule } from '@angular/common';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  menuVisible = false;
-  datosTabla = [
-    {
-      nombre: "Nombre 1",
-      optimo: "Valor 1",
-      probable: "Valor 2",
-      pesimo: "Valor 3"
-    },
-    {
-      nombre: "Nombre 2",
-      optimo: "Valor 4",
-      probable: "Valor 5",
-      pesimo: "Valor 6"
+  datosTabla: Project[] = [];
+  constructor(private router: Router, private homeService: HomeService) { }
+
+  
+    ngOnInit() {
+      if (!localStorage.getItem('authToken')) {
+        this.router.navigate(['']);
+      }
+      this.viewTable();
     }
-  ];
+
+  viewTable() {
+    this.homeService.viewTable().subscribe({
+      next: (datos) => {
+        this.datosTabla = datos;
+        console.log('Tabla de proyectos cargada');
+      },  
+      error: (err) => {
+        console.error('Error al cargar la tabla de proyectos:', err);
+      },  
+    });  
+  }    
+  menuVisible = false;
   
 
   toggleMenu(event: MouseEvent): void {
@@ -36,9 +46,9 @@ export class HomeComponent {
   }
 
   logOut(): void {
-    localStorage.removeItem('userSession');
+    this.homeService.logoutBackend();
     alert('Has cerrado sesión.');
-    window.location.href = '/'; // Redirigir al inicio tras cerrar sesión
+    this.router.navigate(['']);
   }
 
 

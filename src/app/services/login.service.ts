@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_ROUTES } from '../../API-Routes';
-import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +11,14 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(username: string, password: string) {
+  login(username: string, password: string): Observable<{ token: string }> {
     const data = { username, password };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http.post<{ access: string, refresh: string }>(
-      this.baseUrl + API_ROUTES.user.login,
+    return this.http.post<{ token: string }>(
+      `${this.baseUrl}${API_ROUTES.user.login}`,
       data,
       { headers }
-    ).pipe(
-      tap(tokens => {
-        localStorage.setItem('access_token', tokens.access);
-        localStorage.setItem('refresh_token', tokens.refresh);
-      })
     );
   }
 }

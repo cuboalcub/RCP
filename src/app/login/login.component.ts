@@ -12,28 +12,34 @@ import { LoginService } from '../services/login.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  username: string = "";
-  password: string = "";
-
+  username: string = '';
+  password: string = '';
+  error: string = ''; 
   constructor(private loginService: LoginService, private router: Router) { }
 
+  ngOnInit() {
+    if (localStorage.getItem('authToken')) {
+      this.router.navigate(['home']);
+    }
+  }
+
+
   goBack() {
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 
   goLogin() {
-    alert(this.username);
-    alert(this.password);
-    this.loginService.login(this.username, this.password).subscribe(
-      () => {
-        alert(" éxito");
+    this.loginService.login(this.username, this.password).subscribe({
+      next: (res) => {
+        console.log('Token recibido:', res.token);
+        localStorage.setItem('authToken', res.token);
         this.router.navigate(['/home']);
       },
-      (error) => {
-        alert("Error en la cuenta");  
-        console.log(error);
-      }
-    );
+      error: (err) => {
+        console.error('Error al iniciar sesión:', err);
+        this.error = err.error?.error || 'Error desconocido';
+      },
+    });
   }
 
   goSignUp() {

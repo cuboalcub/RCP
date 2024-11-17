@@ -10,17 +10,25 @@ import { Router } from '@angular/router';
   templateUrl: './landing.component.html',
 
 })
+
+
 export class LandingComponent {
-  Media: typeof MediaRCP = MediaRCP; // Definición de tipo correcta para la propiedad 'Media'
+ngOnInit() {
+  if (localStorage.getItem('authToken')) {
+    this.router.navigate(['home']);
+  }
+}
+
+  Media: typeof MediaRCP = MediaRCP;
 
   constructor(private router: Router) { }
 
   goLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['login']);
   }
 
   goSignUp() {
-    this.router.navigate(['/signup']);
+    this.router.navigate(['signup']);
   }
 
 }
