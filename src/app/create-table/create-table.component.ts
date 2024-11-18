@@ -11,7 +11,7 @@ import { Actividad } from '../models/actividades';
 })
 export class CreateTableComponent {
   rows: Actividad[] = [
-    { nombre: 'Actividad 1', mp: 10, o: 5, p: 3, pert: 0, precedentes: [] },
+    { nombre: '', o:0, mp: 0, p: 0, pert: 0, precedentes: [] },
   ];
 
   actividades: string[] = [];
@@ -60,4 +60,18 @@ export class CreateTableComponent {
     });
     console.log('Datos guardados:', this.rows);
   }
+
+  togglePrecedente(row: any, option: string) {
+    const index = row.precedentes.indexOf(option);
+    if (index === -1) {
+      row.precedentes.push(option); // Agregar si no está en la lista
+    } else {
+      row.precedentes.splice(index, 1); // Quitar si ya está seleccionado
+    }
+  }
+
+  filteredActividades(row: any) {
+    return this.actividades.filter((actividad) => actividad !== row.nombre);
+  }
+  
 }

@@ -12,8 +12,8 @@
       <thead class="bg-gradient-to-r from-purple-500 to-green-500 text-white">
         <tr>
           <th class="py-3 px-4">Actividad</th>
-          <th class="py-3 px-4">MP</th>
           <th class="py-3 px-4">O</th>
+          <th class="py-3 px-4">MP</th>
           <th class="py-3 px-4">P</th>
           <th class="py-3 px-4">PERT</th>
           <th class="py-3 px-4">Precedentes</th>
@@ -34,16 +34,16 @@
           <td class="py-3 px-4">
             <input 
               type="number" 
-              placeholder="MP" 
-              [(ngModel)]="row.mp" 
+              placeholder="O" 
+              [(ngModel)]="row.o" 
               class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
             >
           </td>
           <td class="py-3 px-4">
             <input 
               type="number" 
-              placeholder="O" 
-              [(ngModel)]="row.o" 
+              placeholder="mp" 
+              [(ngModel)]="row.mp" 
               class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
           </td>
@@ -65,18 +65,19 @@
             >
           </td>
           <td class="py-3 px-4">
-            <!-- Select múltiple para precedentes -->
-            <select 
-              [(ngModel)]="row.precedentes" 
-              (ngModelChange)="onPrecedentesChange(row, $event)" 
-              multiple 
-              class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              <option *ngFor="let option of actividades" [value]="option">
-                {{ option }}
-              </option>
-            </select>
+            <div class="border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <div *ngFor="let option of filteredActividades(row)" class="flex items-center space-x-2 cursor-pointer">
+                <input 
+                  type="checkbox" 
+                  [checked]="row.precedentes.includes(option)" 
+                  (click)="togglePrecedente(row, option)" 
+                  class="cursor-pointer"
+                >
+                <label (click)="togglePrecedente(row, option)" class="cursor-pointer">{{ option }}</label>
+              </div>
+            </div>
           </td>
+          
           <td class="py-3 px-4 flex space-x-2">
             <button (click)="addRow()" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded shadow">+</button>
             <button (click)="removeRow(i)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded shadow">-</button>
