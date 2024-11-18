@@ -4,5 +4,5 @@ import { CreateTableComponent } from './create-table/create-table.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },           // Ruta para Home
-    { path: 'create-table', component: CreateTableComponent }  // Ruta para CreateTableComponent
+    { path: 'create', component: CreateTableComponent }  // Ruta para CreateTableComponent
 ];

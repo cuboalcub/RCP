@@ -1,29 +1,94 @@
-<div class="fixed top-0 left-0 w-full bg-gradient-to-r from-purple-500 to-green-500 p-4 flex items-center justify-center border-b-2 border-black z-10">
-    <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fcanvas.png?alt=media&token=266cc22d-53b5-44f8-963d-0a0ab0e556cb" alt="Logo" class="h-16">
+<!-- Navbar Superior -->
+<div class="fixed top-0 left-0 w-full bg-gradient-to-r from-purple-500 to-green-500 p-4 flex items-center justify-center border-b-2 border-black z-50">
+  <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fcanvas.png?alt=media&token=266cc22d-53b5-44f8-963d-0a0ab0e556cb" alt="Logo" class="h-16">
 </div>
+<div class="flex flex-col items-center justify-center min-h-screen pt-24 bg-gray-100">
+  <!-- Título -->
+  <h2 class="text-2xl font-semibold mb-6 text-gray-800">Ingresa los datos necesarios a tu tabla</h2>
 
-<div class="container">
-    <h2>Ingresa los datos necesarios a tu tabla</h2>
-    <table>
-        <thead>
-          <tr>
-            <th>Actividad</th>
-            <th>MP</th>
-            <th>O</th>
-            <th>P</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let row of rows" class="row">
-            <td><input type="text" placeholder="Actividad" [(ngModel)]="row.actividad"></td>
-            <td><input type="text" placeholder="MP" [(ngModel)]="row.mp"></td>
-            <td><input type="text" placeholder="O" [(ngModel)]="row.o"></td>
-            <td><input type="text" placeholder="P" [(ngModel)]="row.p"></td>
-            <td><button class="add-row">+</button></td>
-            <td><button class="remove-row">-</button></td>
-          </tr>
-        </tbody>
-      </table>
-      <button class="save">GUARDAR</button>
-      
+  <!-- Contenedor de Tabla con Altura Máxima -->
+  <div class="overflow-x-auto w-full max-w-4xl max-h-96 border border-gray-300 rounded-lg shadow-lg">
+    <table class="min-w-full bg-white rounded-lg">
+      <thead class="bg-gradient-to-r from-purple-500 to-green-500 text-white">
+        <tr>
+          <th class="py-3 px-4">Actividad</th>
+          <th class="py-3 px-4">MP</th>
+          <th class="py-3 px-4">O</th>
+          <th class="py-3 px-4">P</th>
+          <th class="py-3 px-4">PERT</th>
+          <th class="py-3 px-4">Precedentes</th>
+          <th class="py-3 px-4">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-700">
+        <tr *ngFor="let row of rows; let i = index" class="border-b">
+          <td class="py-3 px-4">
+            <input 
+              type="text" 
+              placeholder="Actividad" 
+              [(ngModel)]="row.nombre" 
+              (input)="onNombreChange()" 
+              class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+          </td>
+          <td class="py-3 px-4">
+            <input 
+              type="number" 
+              placeholder="MP" 
+              [(ngModel)]="row.mp" 
+              class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+            >
+          </td>
+          <td class="py-3 px-4">
+            <input 
+              type="number" 
+              placeholder="O" 
+              [(ngModel)]="row.o" 
+              class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+          </td>
+          <td class="py-3 px-4">
+            <input 
+              type="number" 
+              placeholder="P" 
+              [(ngModel)]="row.p" 
+              class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
+          </td>
+          <td class="py-3 px-4">
+            <input 
+              type="number" 
+              [disabled]="true" 
+              placeholder="PERT" 
+              [(ngModel)]="row.pert" 
+              class="w-full px-2 py-1 border rounded focus:outline-none"
+            >
+          </td>
+          <td class="py-3 px-4">
+            <!-- Select múltiple para precedentes -->
+            <select 
+              [(ngModel)]="row.precedentes" 
+              (ngModelChange)="onPrecedentesChange(row, $event)" 
+              multiple 
+              class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              <option *ngFor="let option of actividades" [value]="option">
+                {{ option }}
+              </option>
+            </select>
+          </td>
+          <td class="py-3 px-4 flex space-x-2">
+            <button (click)="addRow()" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded shadow">+</button>
+            <button (click)="removeRow(i)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded shadow">-</button>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Botón Guardar -->
+  <button (click)="saveData()" class="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded shadow transition duration-300">
+    GUARDAR
+  </button>
 </div>
