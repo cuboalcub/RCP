@@ -1,0 +1,41 @@
+
+<body class="bg-white font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-gradient-to-r from-purple-600 via-blue-500 to-teal-400 p-4 flex justify-between items-center">
+        <!-- Logo en la barra de navegación -->
+        <div class="flex-grow flex justify-center">
+            <img src="{{Media.logo}}" alt="RC Logo Navbar" class="w-32 h-32 object-contain">
+        </div>
+        
+        <!-- Botones -->
+        <div class="space-x-4">
+            <button class="bg-white text-teal-500 px-4 py-2 rounded-lg hover:bg-teal-500 hover:text-white transition"
+            (click)="goLogin()"
+            >
+                Log In
+            </button>
+            <button class="bg-purple-700 text-white px-4 py-2 rounded-lg hover:bg-white hover:text-purple-700 transition"
+            (click)="goSignUp()"
+            >
+                Sign Up
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sección Principal -->
+    <section class="flex items-center justify-start mt-16 max-w-5xl mx-auto">
+        <!-- Logo Circular a la Izquierda -->
+        <div class="w-[1300px] h-[670px] bg-gray-200 rounded-full flex items-center justify-center shadow-lg ml-[-27rem] mr-8">
+            <img src="{{Media.logo}}" alt="RC Logo" class="w-32 h-32 object-contain">
+        </div>
+
+        <!-- Texto Principal a la Izquierda -->
+        <div class="text-left flex-grow mr-8">
+            <p class="text-5xl font-black text-white leading-tight tracking-wider" style="text-shadow: 4px 4px 0 #000000;">
+                ACCELERATING YOUR PROJECT'S<br> SUCCESS, STEP BY STEP
+            </p>
+        </div>
+    </section>
+
+</body>
