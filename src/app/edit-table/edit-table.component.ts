@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Location } from '@angular/common'; // Importa Location
+import { EditTableService } from '../services/edit-table.service'; // Importa el servicio
 import { Actividad } from '../models/actividades';
-import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-create-table',
+  selector: 'app-edit-table',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './create-table.component.html',
+  templateUrl: './edit-table.component.html',
 })
-export class CreateTableComponent {
+export class EditTableComponent {
   rows: Actividad[] = [
     { nombre: '', o: 0, mp: 0, p: 0, pert: 0, precedentes: [] },
   ];
@@ -22,7 +23,7 @@ export class CreateTableComponent {
   }
 
   goBack(): void {
-    this.location.back();
+    this.location.back(); // Navegar a la página anterior
   }
 
   updateActividades(): void {
@@ -61,7 +62,7 @@ export class CreateTableComponent {
     console.log('Datos guardados:', this.rows);
   }
 
-  togglePrecedente(row: any, option: string) {
+  togglePrecedente(row: any, option: string): void {
     const index = row.precedentes.indexOf(option);
     if (index === -1) {
       row.precedentes.push(option);
@@ -70,7 +71,7 @@ export class CreateTableComponent {
     }
   }
 
-  filteredActividades(row: any) {
+  filteredActividades(row: any): string[] {
     return this.actividades.filter((actividad) => actividad !== row.nombre);
   }
 }
