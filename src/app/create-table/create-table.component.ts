@@ -54,10 +54,16 @@ export class CreateTableComponent {
     console.log(`Precedentes de ${row.nombre} actualizados:`, row.precedentes);
   }
 
-  saveData(): void {
-    this.rows.forEach((row) => {
-      row.pert = this.calculatePERT(row);
-    });
+  saveData() {
+    const invalidRows = this.rows.filter(row => 
+      !row.nombre || row.o === null || row.mp === null || row.p === null
+    );
+
+    if (invalidRows.length > 0) {
+      alert('Todos los campos obligatorios deben estar llenos.');
+      return;
+    }
+
     console.log('Datos guardados:', this.rows);
   }
 
