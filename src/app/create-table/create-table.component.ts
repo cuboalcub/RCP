@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Actividad } from '../models/actividades';
+import { Proyecto } from '../models/actividades';
 import { Location } from '@angular/common';
 
 @Component({
@@ -11,9 +12,11 @@ import { Location } from '@angular/common';
   templateUrl: './create-table.component.html',
 })
 export class CreateTableComponent {
-  rows: Actividad[] = [
-    { nombre: '', o: 0, mp: 0, p: 0, pert: 0, precedentes: [] },
-  ];
+  rows: Proyecto = {
+    id: 0,
+    nombre: '',
+    actividades: {},
+  };
   nombre: string = 'X';
 
   actividades: string[] = [];

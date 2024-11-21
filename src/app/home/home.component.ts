@@ -33,20 +33,6 @@ export class HomeComponent {
     });  
   }    
   menuVisible = false;
-  datosTabla = [
-    {
-      nombre: "Nombre 1",
-      optimo: "Valor 1",
-      probable: "Valor 2",
-      pesimo: "Valor 3"
-    },
-    {
-      nombre: "Nombre 2",
-      optimo: "Valor 4",
-      probable: "Valor 5",
-      pesimo: "Valor 6"
-    }
-  ];
 
   goedit(nombre: string): void {
     this.router.navigate(['edit', nombre]);
