@@ -14,6 +14,7 @@ export class CreateTableComponent {
   rows: Actividad[] = [
     { nombre: '', o: 0, mp: 0, p: 0, pert: 0, precedentes: [] },
   ];
+  nombre: string = 'X';
 
   actividades: string[] = [];
 

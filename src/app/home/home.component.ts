@@ -1,6 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+  constructor(private router: Router) {}
+
   menuVisible = false;
   datosTabla = [
     {
@@ -23,7 +25,14 @@ export class HomeComponent {
       pesimo: "Valor 6"
     }
   ];
-  
+
+  goedit(nombre: string): void {
+    this.router.navigate(['edit', nombre]);
+  }
+
+  gocreate(): void {
+    this.router.navigate(['create']);
+  }
 
   toggleMenu(event: MouseEvent): void {
     event.stopPropagation();
