@@ -5,6 +5,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { CreateTableComponent } from './create-table/create-table.component';
 import { EditTableComponent } from './edit-table/edit-table.component';
+import { RcViewerComponent } from './rc-viewer/rc-viewer.component';
 
 export const routes: Routes = [
     {path:"home", component: HomeComponent},
@@ -12,6 +13,6 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'signup', component: SignUpComponent }, 
     {path: 'create', component: CreateTableComponent },
-    {path: 'edit', component: EditTableComponent}
-
+    {path: 'edit', component: EditTableComponent},
+    { path: "rc-viewer", component: RcViewerComponent }
 ];

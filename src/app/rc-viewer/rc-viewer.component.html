@@ -1,0 +1,80 @@
+<!-- Contenedor principal -->
+<div 
+  class="relative w-full bg-gradient-to-r from-purple-500 to-green-500 p-4 flex items-center justify-center border-b-2 border-black z-50"
+>
+  <!-- Logo -->
+  <img 
+    src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fcanvas.png?alt=media&token=266cc22d-53b5-44f8-963d-0a0ab0e556cb" 
+    alt="Logo del proyecto" 
+    class="h-16"
+  >
+</div>
+
+<!-- Botón para volver atrás -->
+<button 
+  (click)="goBack()" 
+  class="absolute top-40 left-10 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center font-bold hover:bg-red-600 z-50"
+  aria-label="Cerrar"
+>
+  ✕
+</button>
+
+<!-- Contenido principal -->
+<div class="flex flex-col items-center justify-start min-h-screen pt-12 bg-gray-100">
+  <!-- Título -->
+  <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+    Ruta Crítica del proyecto:
+  </h2>
+  
+  <!-- Tabla -->
+  <table class="w-full text-center">
+    <thead>
+      <tr>
+        <th class="py-3 px-4 text-lg font-semibold text-gray-700">
+          Nombre
+        </th>
+      </tr>
+    </thead>
+  </table>
+
+  <!-- Imagen del Árbol de Actividades -->
+  <img 
+    src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Farbol_actividades_con_imagenes_matplotlib.png?alt=media&token=a84c4d7a-393a-456f-8cf1-fb1d0efd4172" 
+    alt="Árbol de actividades del proyecto" 
+    class="mt-4 w-5/6 h-auto"
+  >
+
+  <!-- Tabla de Nodos -->
+  <div class="mt-6 w-5/6 overflow-x-auto">
+    <table class="table-auto w-full border-collapse border border-gray-300 text-sm text-gray-700">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border border-gray-300 px-4 py-2">Nodo</th>
+          <th class="border border-gray-300 px-4 py-2">Actividad</th>
+          <th class="border border-gray-300 px-4 py-2">Duración</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Fila 1 -->
+        <tr>
+          <td class="border border-gray-300 px-4 py-2 text-center">A</td>
+          <td class="border border-gray-300 px-4 py-2 text-center">Inicio</td>
+          <td class="border border-gray-300 px-4 py-2 text-center">0 días</td>
+        </tr>
+        <!-- Fila 2 -->
+        <tr>
+          <td class="border border-gray-300 px-4 py-2 text-center">B</td>
+          <td class="border border-gray-300 px-4 py-2 text-center">Planeación</td>
+          <td class="border border-gray-300 px-4 py-2 text-center">5 días</td>
+        </tr>
+        <!-- Fila 3 -->
+        <tr>
+          <td class="border border-gray-300 px-4 py-2 text-center">C</td>
+          <td class="border border-gray-300 px-4 py-2 text-center">Desarrollo</td>
+          <td class="border border-gray-300 px-4 py-2 text-center">10 días</td>
+        </tr>
+        <!-- Agregar más filas si es necesario -->
+      </tbody>
+    </table>
+  </div>
+</div>
