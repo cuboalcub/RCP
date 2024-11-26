@@ -40,8 +40,7 @@
               type="text" 
               placeholder="Actividad" 
               [(ngModel)]="row.key"
-              (click)="key(row.key)"
-              (ngModelChange)="onNombreChange( $event)"
+              (blur)="onNombreChange(row.key)"
               class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
           </td>
