@@ -35,7 +35,7 @@
               <input 
                 type="text" 
                 placeholder="Actividad" 
-                [(ngModel)]="row.nombre" 
+                
                 (input)="onNombreChange()" 
                 class="w-full px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
               >
@@ -73,7 +73,7 @@
                 class="w-full px-2 py-1 border rounded focus:outline-none"
               >
             </td>
-            <td class="py-3 px-4">
+            <!-- <td class="py-3 px-4">
               <div class="border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 <div *ngFor="let option of filteredActividades(row)" class="flex items-center space-x-2 cursor-pointer">
                   <input 
@@ -85,7 +85,7 @@
                   <label (click)="togglePrecedente(row, option)" class="cursor-pointer">{{ option }}</label>
                 </div>
               </div>
-            </td>
+            </td> -->
             
             <td class="py-3 px-4 flex space-x-2">
               <button (click)="addRow()" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded shadow">+</button>

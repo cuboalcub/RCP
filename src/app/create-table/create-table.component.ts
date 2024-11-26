@@ -1,3 +1,4 @@
+import { CreateService } from '../services/create.service';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,16 +13,28 @@ import { Location } from '@angular/common';
 })
 export class CreateTableComponent {
   proyecto: Proyecto = {
-    id: 1,
-    nombre: 'Nuevo Proyecto',
+    nombre: '',
     actividades: {},
   };
 
-  nombre: string = 'X'; // Nombre del proyecto por defecto
-  actividadesNombres: string[] = []; // Lista de nombres de actividades para precedentes
+  actividadesNombres: string[] = []; 
+  
+  oldkey: string = "";
+  constructor(private location: Location, private createService: CreateService, )  {}
 
-  constructor(private location: Location) {
+  // Método correcto del ciclo de vida de Angular
+  ngOnInit(): void {
+    const key = Object.keys(this.proyecto.actividades).length.toString();
+    this.proyecto.actividades[key] = {
+      o: 0,
+      mp: 0,
+      p: 0,
+      pert: 0,
+      precedentes: [],
+    };
     this.updateActividadesNombres();
+
+    console.log(this.proyecto);
   }
 
   // Navegar hacia atrás
@@ -32,12 +45,28 @@ export class CreateTableComponent {
   // Actualiza la lista de nombres de actividades
   updateActividadesNombres(): void {
     this.actividadesNombres = Object.keys(this.proyecto.actividades);
+    
   }
+
+  key(key:string){
+    this.oldkey = key;
+  }
+
+// Método para manejar el cambio de nombre de una actividad
+onNombreChange( newKey: string): void {
+
+  this.proyecto.actividades[newKey] = this.proyecto.actividades[this.oldkey];
+  delete this.proyecto.actividades[this.oldkey];
+
+  // Actualizar la lista de actividades
+  this.updateActividadesNombres();
+}
+
 
   // Agrega una nueva actividad al proyecto
   addRow(): void {
-    const id = `Actividad${this.actividadesNombres.length + 1}`;
-    this.proyecto.actividades[id] = {
+    const key = "A"+Object.keys(this.proyecto.actividades).length.toString();
+    this.proyecto.actividades[key] = {
       o: 0,
       mp: 0,
       p: 0,
@@ -46,6 +75,8 @@ export class CreateTableComponent {
     };
     this.updateActividadesNombres();
   }
+   
+  
 
   // Elimina una actividad por su clave
   removeRow(key: string): void {
@@ -57,6 +88,7 @@ export class CreateTableComponent {
   calculatePERT(actividad: Actividad): number {
     return (actividad.o + 4 * actividad.mp + actividad.p) / 6;
   }
+  
 
   // Manejo de precedentes en una actividad
   onPrecedentesChange(key: string, selected: string[]): void {
@@ -64,21 +96,39 @@ export class CreateTableComponent {
     console.log(`Precedentes de ${key} actualizados:`, selected);
   }
 
-  // Guardar datos del proyecto
   saveData(): void {
     const actividades = Object.values(this.proyecto.actividades);
-    const invalidActividades = actividades.filter(
-      (actividad) =>
-        actividad.o === null || actividad.mp === null || actividad.p === null
-    );
-
-    if (invalidActividades.length > 0) {
-      alert('Todos los campos obligatorios deben estar llenos.');
+    if (this.proyecto.nombre == null){
+      alert('El nombre del proyecto no puede estar vacío.');
       return;
     }
-
+    const invalidActividades = actividades.filter(
+      (actividad) =>
+        actividad.o === null ||
+        actividad.o < 0 ||
+        actividad.mp === null ||
+        actividad.mp < 0 ||
+        actividad.p === null ||
+        actividad.p < 0
+    );
+    
+    if (invalidActividades.length > 0) {
+      alert('Todos los campos deben tener valores válidos (mayores o iguales a 0).');
+      return;
+    }
     console.log('Datos guardados del proyecto:', this.proyecto);
+    this.createService.create(this.proyecto).subscribe(
+      () => {
+        alert('Proyecto creado con éxito');
+        this.location.back();
+      },
+      (error) => {
+        alert('Error al crear el proyecto');
+        console.error(error);
+      }
+    );
   }
+  
 
   // Alterna el estado de un precedente en la actividad
   togglePrecedente(actividad: Actividad, option: string): void {

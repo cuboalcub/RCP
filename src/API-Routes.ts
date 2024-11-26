@@ -9,6 +9,5 @@ export const API_ROUTES = {
         view:'/project/view',
         add:'/project/add',
         edit:'/project/edit',
-
     }
 }

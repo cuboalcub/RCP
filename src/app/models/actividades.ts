@@ -1,5 +1,5 @@
 export interface Actividad {
-    o: number; // Tiempo de actividad
+    o: number ; // Tiempo de la actividad
     mp: number; // Tiempo de media de la actividad
     p: number; // Tiempo de la actividad
     pert: number; // Tiempo estimado de la actividad
@@ -8,7 +8,6 @@ export interface Actividad {
 
 // Modelo principal que contiene el nombre del proyecto y las actividades
 export interface Proyecto {
-    id : number; // Identificador del proyecto
     nombre: string; // Nombre del proyecto
-    actividades: Record<string, Actividad>; // Un mapa de actividades por su clave única
+    actividades: Record<string , Actividad> 
 }
