@@ -15,6 +15,7 @@
 
     
       ngOnInit() {
+        this.reloadCurrentRoute();
         if (!localStorage.getItem('authToken')) {
           this.router.navigate(['']);
         }
@@ -66,5 +67,32 @@
         console.log('Elemento eliminado:', elemento);
       }
     }
+    goEdit(id: number) {
+    localStorage.setItem('proyecto', id.toString());
+    this.router.navigate(['edit']);
+    }
 
+    reloadCurrentRoute() {
+      this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+        this.router.navigate([this.router.url]);
+      });
+    }
+    
+    viewRCP(id: number) {
+      localStorage.setItem('proyecto', id.toString());
+      this.router.navigate(['rc']);
+    }
+    
+    goDelete(id: number) {
+      this.homeService.deleteProject(id.toString()).subscribe({
+        next: () => {
+          this.eliminarElemento(this.datosTabla.find((elemento) => elemento.id === id));
+        },
+        error: (err) => {
+          console.error('Error al eliminar el proyecto:', err);
+        }
+      });
+      
+    }
+    
   }

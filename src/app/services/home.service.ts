@@ -19,7 +19,6 @@ export class HomeService {
     });
     return this.http.get<Project[]>(this.baseUrl + API_ROUTES.project.view, { headers });
   }
-
   logout() {
     localStorage.removeItem('authToken'); // Elimina el token
     sessionStorage.removeItem('authToken'); // Si lo guardaste en sessionStorage
@@ -46,5 +45,17 @@ export class HomeService {
       }
     });
   }
+
+  deleteProject(id: string) {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}` 
+    });
+    return this.http.delete<{ message: string }>(
+      `${this.baseUrl}${API_ROUTES.project.delete}${id}`,  
+      {  headers }
+    )
+    };
   
 }

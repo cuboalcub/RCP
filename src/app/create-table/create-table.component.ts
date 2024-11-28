@@ -53,14 +53,12 @@ export class CreateTableComponent {
   }
 
 // Método para manejar el cambio de nombre de una actividad
-onNombreChange(newKey: string): void {
-  if (newKey !== this.oldkey && newKey.trim() !== '') {
-    this.proyecto.actividades[newKey] = this.proyecto.actividades[this.oldkey];
-    delete this.proyecto.actividades[this.oldkey];
-    this.updateActividadesNombres();
-  }
+onNombreChange( newKey: string): void {
+  this.proyecto.actividades[newKey] = this.proyecto.actividades[this.oldkey];
+  delete this.proyecto.actividades[this.oldkey];
+  // Actualizar la lista de actividades
+  this.updateActividadesNombres();
 }
-
 
 
   // Agrega una nueva actividad al proyecto
@@ -93,8 +91,13 @@ removeRow(key: string): void {
 
 
   // Calcula el valor PERT para una actividad
-  calculatePERT(actividad: Actividad): number {
-    return (actividad.o + 4 * actividad.mp + actividad.p) / 6;
+  calculatePERT(actividad: Actividad, key: string): number {
+
+  const numero = (actividad.o + 4 * actividad.mp + actividad.p) / 6;
+  const decimales = 2;
+  const redondeado = Math.round(numero * Math.pow(10, decimales)) / Math.pow(10, decimales);
+    this.proyecto.actividades[key].pert = redondeado;
+    return this.proyecto.actividades[key].pert; 
   }
   
 

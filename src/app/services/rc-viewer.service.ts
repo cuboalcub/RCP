@@ -1,36 +1,18 @@
 import { Injectable } from '@angular/core';
-
-interface Nodo {
-  id: number;
-  nombre: string;
-  duracion: number;
-  predecesores: number[];
-  sucesores: number[];
-  inicioTemprano: number;
-  finTemprano: number;
-  inicioTardio: number;
-  finTardio: number;
-  esCritico: boolean;
-}
-
+import { HttpClient } from '@angular/common/http';
+import { API_ROUTES } from '../../API-Routes';
+import { HttpHeaders } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class RutaCriticaService {
-  calcularRutaCritica(nodos: Nodo[]): Nodo[] {
-    // Implementación del algoritmo de cálculo de la ruta crítica
-    // ...
 
-    // Ejemplo básico:
-    nodos.forEach(nodo => {
-      // Cálculo del inicio temprano y fin temprano
-      // ...
+constructor(private http: HttpClient) { }
+private url = API_ROUTES.baseUrl;
 
-      // Cálculo del inicio tardío y fin tardío
-      // ...
-
-      // Marcar como crítico si finTemprano === finTardio
-      nodo.esCritico = nodo.finTemprano === nodo.finTardio;
-    });
-
-    return nodos;
+headers = new HttpHeaders({ 'Content-Type': 'application/json',
+    'Authorization': 'Token ' + localStorage.getItem('authToken')
+ });
+id = localStorage.getItem('proyecto');
+getRutaCritica() {
+  return this.http.get<any>(this.url + API_ROUTES.project.rc + this.id, { headers: this.headers });
   }
 }

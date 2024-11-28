@@ -14,5 +14,5 @@ export const routes: Routes = [
     {path: 'signup', component: SignUpComponent }, 
     {path: 'create', component: CreateTableComponent },
     {path: 'edit', component: EditTableComponent},
-    { path: "rc-viewer", component: RcViewerComponent }
+    { path: "rc", component: RcViewerComponent }
 ];

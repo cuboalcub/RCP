@@ -53,16 +53,19 @@
                     <td class="px-6 py-4 whitespace-nowrap">{{elemento.nombre}}</td>
                     
                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2FSin_t%C3%ADtulo-removebg-preview.png" alt="Icono de ojo" class="w-12 h-12">
+                        <button
+                        img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2FSin_t%C3%ADtulo-removebg-preview.png"
+                        (click)="viewRCP(elemento.id)"
+                        class="w-12 h-12 bg-fuchsia-300 hover:bg-fuchsia-500 text-white font-bold flex items-center justify-center"
+                        >
+                    </button>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-center"
                     >
-                        <a href="edit-table"><button class="w-10 h-10 rounded-full border-1 border-gray-200 shadow-md bg-blue-500 hover:bg-blue-700 text-white font-bold flex items-center justify-center"  aria-label="Editar" (click)="goedit(elemento.nombre)"></button>
-                        
-                        </a>
+                        <button class="w-10 h-10 rounded-full border-1 border-gray-200 shadow-md bg-blue-500 hover:bg-blue-700 text-white font-bold flex items-center justify-center"  aria-label="Editar" (click)="goEdit(elemento.id)"></button>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fimagsadasdaes-removebg-preview.png" alt="Icono de eliminar" class="w-10 h-10">
+                    <button class="w-10 h-10 rounded-full border-1 border-gray-200 shadow-md bg-red-500 hover:bg-red-700 text-white font-bold flex items-center justify-center"  aria-label="Eliminar" (click)="goDelete(elemento.id)"></button>
                     </td>
                 </tr>
 
