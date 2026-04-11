@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_ROUTES } from '../../API-Routes';
 import { Project } from '../models/project/project.modelo';
+import { of, delay } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,12 +13,13 @@ export class HomeService {
 
 
   viewTable() {
-    const token = localStorage.getItem('authToken');
-    
-    const headers = new HttpHeaders({
-      'Authorization': `Token ${token}`,
-    });
-    return this.http.get<Project[]>(this.baseUrl + API_ROUTES.project.view, { headers });
+    console.log('Mock Fetching Projects');
+    const mockProjects: Project[] = [
+      { id: 1, nombre: 'Proyecto de Construcción A' },
+      { id: 2, nombre: 'Lanzamiento de Producto B' },
+      { id: 3, nombre: 'Mantenimiento de Red C' }
+    ];
+    return of(mockProjects).pipe(delay(500));
   }
   logout() {
     localStorage.removeItem('authToken'); // Elimina el token
@@ -26,36 +28,14 @@ export class HomeService {
   }
   
   logoutBackend() {
-    const token = localStorage.getItem('authToken');
-    const headers = new HttpHeaders({ 
-      'Content-Type': 'application/json',
-      'Authorization': `Token ${token}` 
-    });
-  
-    return this.http.post<{ message: string }>(
-      `${this.baseUrl}${API_ROUTES.user.logout}`, 
-      {}, 
-      { headers }
-    ).subscribe({
-      next: () => {
-        this.logout(); // Limpia el token local
-      },
-      error: (err) => {
-        console.error('Error al cerrar sesión:', err);
-      }
-    });
+    console.log('Mock Backend Logout');
+    this.logout();
+    return of({ message: 'Success' }).pipe(delay(300));
   }
 
   deleteProject(id: string) {
-    const token = localStorage.getItem('authToken');
-    const headers = new HttpHeaders({ 
-      'Content-Type': 'application/json',
-      'Authorization': `Token ${token}` 
-    });
-    return this.http.delete<{ message: string }>(
-      `${this.baseUrl}${API_ROUTES.project.delete}${id}`,  
-      {  headers }
-    )
-    };
+    console.log('Mock Deleting Project:', id);
+    return of({ message: 'Project deleted successfully' }).pipe(delay(500));
+  }
   
 }

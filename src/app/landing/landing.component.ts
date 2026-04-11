@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [],
   templateUrl: './landing.component.html',
-
+  styleUrl: './landing.component.css'
 })
 
 

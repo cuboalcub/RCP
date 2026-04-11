@@ -1,65 +1,121 @@
-<!-- Contenedor principal -->
-<div 
-  class="relative w-full bg-gradient-to-r from-purple-500 to-green-500 p-4 flex items-center justify-center border-b-2 border-black z-50"
->
-  <!-- Logo -->
-  <img 
-    src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fcanvas.png?alt=media&token=266cc22d-53b5-44f8-963d-0a0ab0e556cb" 
-    alt="Logo del proyecto" 
-    class="h-16"
-  >
-</div>
+<div class="dashboard-container font-sans text-slate-900 pb-20">
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 left-0 w-full glass-nav z-50 h-20 px-8 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <button (click)="goBack()" 
+                    class="btn-icon bg-slate-50 text-slate-600 hover:bg-slate-100"
+                    title="Volver">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l-7-7m7 7h18" />
+                </svg>
+            </button>
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-indigo-50 rounded-xl">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Fcanvas.png?alt=media&token=266cc22d-53b5-44f8-963d-0a0ab0e556cb"
+                         alt="Logo" class="h-8 w-auto">
+                </div>
+                <h2 class="text-xl font-black tracking-tight text-slate-800 uppercase flex items-center">
+                    {{nombre}}
+                    <span class="demo-badge">DEMO</span>
+                </h2>
+            </div>
+        </div>
 
-<!-- Botón para volver atrás -->
-<button 
-  (click)="goBack()" 
-  class="absolute top-40 left-10 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center font-bold hover:bg-red-600 z-50"
-  aria-label="Cerrar"
->
-  ✕
-</button>
+        <div class="flex items-center gap-4">
+            <span class="status-badge bg-fuchsia-50 text-fuchsia-600 border border-fuchsia-100">Visor de Resultados</span>
+        </div>
+    </nav>
 
-<!-- Contenido principal -->
-<div class="flex flex-col items-center justify-start min-h-screen pt-12 bg-gray-100">
-  <!-- Título -->
-  <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-    Ruta Crítica del proyecto:
-  </h2>
-  
-  <!-- Tabla -->
-  <table class="w-full text-center">
-    <thead>
-      <tr>
-        <th class="py-3 px-4 text-lg font-semibold text-gray-700">
-          {{nombre}}
-        </th>
-      </tr>
-    </thead>
-  </table>
+    <div class="container mx-auto px-6 pt-28 animate-fade-up">
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+            <div>
+                <h1 class="text-3xl font-black text-slate-900">Análisis de Ruta Crítica</h1>
+                <p class="text-slate-500 font-medium">Visualización detallada del árbol de actividades y dependencias.</p>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="text-right">
+                    <p class="text-xs font-black text-slate-400 uppercase tracking-widest">Tiempo Total</p>
+                    <p class="text-2xl font-black text-indigo-600">{{tiempoTotal}} días</p>
+                </div>
+            </div>
+        </div>
 
-  <!-- Imagen del Árbol de Actividades -->
-  <img 
-    src="{{url}}"
-    alt="Árbol de actividades del proyecto" 
-    class="mt-4 w-5/6 h-auto"
-  >
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Main Path Visualization -->
+            <div class="lg:col-span-2 space-y-8">
+                <div class="bg-white rounded-3xl border border-slate-100 card-shadow p-8 flex flex-col items-center">
+                    <div class="w-full flex items-center justify-between mb-6">
+                        <h3 class="font-black text-slate-800 uppercase tracking-wider text-sm flex items-center gap-2">
+                            <svg class="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                            </svg>
+                            Gráfico de Actividades
+                        </h3>
+                        <span class="text-xs font-bold text-slate-400">Generado automáticamente</span>
+                    </div>
+                    <div class="w-full rounded-2xl overflow-hidden border border-slate-50 shadow-inner bg-slate-50 p-4">
+                        <img [src]="url" alt="Árbol de actividades" class="w-full h-auto object-contain mix-blend-multiply">
+                    </div>
+                </div>
 
-  <!-- Tabla de Nodos -->
-  <div class="flex justify-end">
-    <table class="table-auto w-auto border-collapse border border-gray-300 text-sm text-gray-700">
-      <thead>
-        <tr class="bg-gray-200">
-          <th class="border border-gray-300 px-10 py-2 ">Nodo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Fila 1 -->
-        <tr>
-          <td class="border border-gray-300 px-3 py-2 text-center">A</td>
-        </tr>
-        <!-- Agregar más filas si es necesario -->
-      </tbody>
-    </table>
-  </div>
-  
+                <!-- Ruta Card -->
+                <div class="bg-indigo-600 rounded-3xl p-8 text-white shadow-xl shadow-indigo-100 relative overflow-hidden">
+                    <div class="relative z-10">
+                        <p class="text-indigo-100 text-xs font-black uppercase tracking-widest mb-2">Ruta Crítica Identificada</p>
+                        <h2 class="text-4xl font-black mb-4 tracking-tighter">{{rutaCriticaStr}}</h2>
+                        <div class="flex items-center gap-2 text-indigo-100">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="text-sm font-medium">Estas actividades determinan la duración mínima del proyecto.</span>
+                        </div>
+                    </div>
+                    <!-- Decorative element -->
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+
+            <!-- Side Detail Panel -->
+            <div class="lg:col-span-1 space-y-8">
+                <div class="bg-white rounded-3xl border border-slate-100 card-shadow p-8">
+                    <h3 class="font-black text-slate-800 uppercase tracking-wider text-sm mb-6 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                        </svg>
+                        Detalle por Nodo
+                    </h3>
+                    
+                    <div class="space-y-3">
+                        <div *ngFor="let nodo of nodosDetalle" class="node-chip"
+                             [ngClass]="nodo.esCritica ? 'bg-rose-50 border-rose-100' : 'bg-slate-50 border-slate-100'">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black"
+                                 [ngClass]="nodo.esCritica ? 'bg-rose-500 text-white' : 'bg-slate-300 text-slate-600'">
+                                {{nodo.id}}
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-bold text-slate-800">{{nodo.descripcion}}</p>
+                                <p class="text-[10px] font-black text-slate-400 uppercase">{{nodo.duracion}} días duración</p>
+                            </div>
+                            <div *ngIf="nodo.esCritica" class="status-badge bg-rose-100 text-rose-600 !text-[8px]">Crítico</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tip Card -->
+                <div class="bg-slate-900 rounded-3xl p-8 text-white">
+                    <h4 class="font-bold mb-4 flex items-center gap-2 text-indigo-400">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                        </svg>
+                        Optimización
+                    </h4>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Para reducir el tiempo total del proyecto en <strong>2 días</strong>, enfóquese en optimizar el nodo <strong>B (Estructura)</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,4 +1,3 @@
-import { CreateService } from '../services/create.service';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +9,7 @@ import { Location } from '@angular/common';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './create-table.component.html',
+  styleUrl: './create-table.component.css'
 })
 export class CreateTableComponent {
   proyecto: Proyecto = {
@@ -17,12 +17,11 @@ export class CreateTableComponent {
     actividades: {},
   };
 
-  actividadesNombres: string[] = []; 
-  
-  oldkey: string = "";
-  constructor(private location: Location, private createService: CreateService, )  {}
+  actividadesNombres: string[] = [];
 
-  // Método correcto del ciclo de vida de Angular
+  oldkey: string = "";
+  constructor(private location: Location) { }
+
   ngOnInit(): void {
     const key = Object.keys(this.proyecto.actividades).length.toString();
     this.proyecto.actividades[key] = {
@@ -33,37 +32,29 @@ export class CreateTableComponent {
       precedentes: [],
     };
     this.updateActividadesNombres();
-
     console.log(this.proyecto);
   }
 
-  // Navegar hacia atrás
   goBack(): void {
     this.location.back();
   }
 
-  // Actualiza la lista de nombres de actividades
   updateActividadesNombres(): void {
     this.actividadesNombres = Object.keys(this.proyecto.actividades);
-    
   }
 
-  key(key:string){
+  key(key: string) {
     this.oldkey = key;
   }
 
-// Método para manejar el cambio de nombre de una actividad
-onNombreChange( newKey: string): void {
-  this.proyecto.actividades[newKey] = this.proyecto.actividades[this.oldkey];
-  delete this.proyecto.actividades[this.oldkey];
-  // Actualizar la lista de actividades
-  this.updateActividadesNombres();
-}
+  onNombreChange(newKey: string): void {
+    this.proyecto.actividades[newKey] = this.proyecto.actividades[this.oldkey];
+    delete this.proyecto.actividades[this.oldkey];
+    this.updateActividadesNombres();
+  }
 
-
-  // Agrega una nueva actividad al proyecto
   addRow(): void {
-    const key = "A"+Object.keys(this.proyecto.actividades).length.toString();
+    const key = "A" + Object.keys(this.proyecto.actividades).length.toString();
     this.proyecto.actividades[key] = {
       o: 0,
       mp: 0,
@@ -73,35 +64,24 @@ onNombreChange( newKey: string): void {
     };
     this.updateActividadesNombres();
   }
-   
-  
 
-  // Elimina una actividad por su clave
-removeRow(key: string): void {  
-  // Verificar si solo hay una actividad
-  if (Object.keys(this.proyecto.actividades).length <= 1) {
-    alert('No puedes eliminar la última actividad.');
-    return;
+  removeRow(key: string): void {
+    if (Object.keys(this.proyecto.actividades).length <= 1) {
+      alert('No puedes eliminar la última actividad.');
+      return;
+    }
+    delete this.proyecto.actividades[key];
+    this.updateActividadesNombres();
   }
 
-  // Eliminar la actividad y actualizar la lista
-  delete this.proyecto.actividades[key];
-  this.updateActividadesNombres();
-}
-
-
-  // Calcula el valor PERT para una actividad
   calculatePERT(actividad: Actividad, key: string): number {
-
-  const numero = (actividad.o + 4 * actividad.mp + actividad.p) / 6;
-  const decimales = 2;
-  const redondeado = Math.round(numero * Math.pow(10, decimales)) / Math.pow(10, decimales);
+    const numero = (actividad.o + 4 * actividad.mp + actividad.p) / 6;
+    const decimales = 2;
+    const redondeado = Math.round(numero * Math.pow(10, decimales)) / Math.pow(10, decimales);
     this.proyecto.actividades[key].pert = redondeado;
-    return this.proyecto.actividades[key].pert; 
+    return this.proyecto.actividades[key].pert;
   }
-  
 
-  // Manejo de precedentes en una actividad
   onPrecedentesChange(key: string, selected: string[]): void {
     this.proyecto.actividades[key].precedentes = selected;
     console.log(`Precedentes de ${key} actualizados:`, selected);
@@ -109,7 +89,7 @@ removeRow(key: string): void {
 
   saveData(): void {
     const actividades = Object.values(this.proyecto.actividades);
-    if (this.proyecto.nombre == null){
+    if (this.proyecto.nombre == null || this.proyecto.nombre === '') {
       alert('El nombre del proyecto no puede estar vacío.');
       return;
     }
@@ -122,26 +102,16 @@ removeRow(key: string): void {
         actividad.p === null ||
         actividad.p < 0
     );
-    
+
     if (invalidActividades.length > 0) {
       alert('Todos los campos deben tener valores válidos (mayores o iguales a 0).');
       return;
     }
     console.log('Datos guardados del proyecto:', this.proyecto);
-    this.createService.create(this.proyecto).subscribe(
-      () => {
-        alert('Proyecto creado con éxito');
-        this.location.back();
-      },
-      (error) => {
-        alert('Error al crear el proyecto');
-        console.error(error);
-      }
-    );
+    alert('Proyecto creado con éxito');
+    this.location.back();
   }
-  
 
-  // Alterna el estado de un precedente en la actividad
   togglePrecedente(actividad: Actividad, option: string): void {
     const index = actividad.precedentes.indexOf(option);
     if (index === -1) {
@@ -151,8 +121,8 @@ removeRow(key: string): void {
     }
   }
 
-  // Filtra las actividades para evitar precedentes circulares
   filteredActividades(key: string): string[] {
     return this.actividadesNombres.filter((nombre) => nombre !== key);
   }
 }
+

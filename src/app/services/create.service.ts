@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http';
 import { Proyecto } from '../models/actividades';
 import { API_ROUTES } from '../../API-Routes';
+import { of, delay } from 'rxjs';
 
 
 @Injectable({
@@ -17,15 +18,9 @@ export class CreateService {
 
 
   create(proyecto: Proyecto) {
-    const Headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Token ${this.token}`,
-    });
-
-    return this.http.post<Proyecto>(
-      `${this.baseUrl}${API_ROUTES.project.add}`, 
-      proyecto, 
-      { headers: Headers }
-    );
+    console.log('Mock Creating Project:', proyecto.nombre);
+    // Simulate saving the project ID so the next views work
+    localStorage.setItem('proyecto', 'mock-project-id-999');
+    return of(proyecto).pipe(delay(800));
   }
 }

@@ -1,78 +1,65 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Location } from '@angular/common'; // Importa Location
-import { EditTableService } from '../services/edit-table.service'; // Importa el servicio
-import { Actividad } from '../models/actividades';
-import { Proyecto } from '../models/actividades';
+import { Location } from '@angular/common';
+import { Actividad, Proyecto } from '../models/actividades';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-edit-table',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './edit-table.component.html',
+  styleUrl: './edit-table.component.css'
 })
 export class EditTableComponent {
- 
-  actividadesNombres: string[] = []; 
+
+  actividadesNombres: string[] = [];
   proyecto: Proyecto = {
     nombre: '',
     actividades: {}
-  }
+  };
   oldkey: string = "";
-  constructor(private lo: Location, private editTableService: EditTableService, private router: Router, )  {}
 
-  // Método correcto del ciclo de vida de Angular
+  constructor(private lo: Location, private router: Router) { }
+
   ngOnInit(): void {
-    this.editTableService.getTable().subscribe({
-      next: (response) => {
-        // Accede a 'data' en la respuesta y asigna solo el objeto 'proyecto'
-        this.proyecto = response.data || { nombre: '', actividades: {} };
-        console.log('Proyecto cargado:', this.proyecto);
-        this.updateActividadesNombres(); // Actualiza la lista de actividades}
-        
-      },
-      error: (err) => {
-        console.error('Error al cargar el proyecto:', err);
-      },
-    });
+    // Mock data para poder navegar sin API
+    this.proyecto = {
+      nombre: 'Proyecto de Ejemplo',
+      actividades: {
+        'A': { o: 2, mp: 4, p: 6, pert: 4, precedentes: [] },
+        'B': { o: 1, mp: 3, p: 5, pert: 3, precedentes: ['A'] },
+      }
+    };
+    this.updateActividadesNombres();
   }
-  
 
-  // Navegar hacia atrás
   goBack(): void {
     localStorage.removeItem('proyecto');
-    
-    this.proyecto= {nombre: '', actividades: {}};
+    this.proyecto = { nombre: '', actividades: {} };
     this.updateActividadesNombres();
     this.lo.back();
   }
 
-  // Actualiza la lista de nombres de actividades
   updateActividadesNombres(): void {
     if (this.proyecto.actividades) {
       this.actividadesNombres = Object.keys(this.proyecto.actividades);
     }
   }
-  
-  
 
-  key(key:string){
+  key(key: string) {
     this.oldkey = key;
   }
 
-// Método para manejar el cambio de nombre de una actividad
-onNombreChange( newKey: string): void {
-  this.proyecto.actividades[newKey] = this.proyecto.actividades[this.oldkey];
-  delete this.proyecto.actividades[this.oldkey];
-  // Actualizar la lista de actividades
-  this.updateActividadesNombres();
-}
+  onNombreChange(newKey: string): void {
+    this.proyecto.actividades[newKey] = this.proyecto.actividades[this.oldkey];
+    delete this.proyecto.actividades[this.oldkey];
+    this.updateActividadesNombres();
+  }
 
-
-  // Agrega una nueva actividad al proyecto
   addRow(): void {
-    const key = "A"+Object.keys(this.proyecto.actividades).length.toString();
+    const key = "A" + Object.keys(this.proyecto.actividades).length.toString();
     this.proyecto.actividades[key] = {
       o: 0,
       mp: 0,
@@ -82,35 +69,24 @@ onNombreChange( newKey: string): void {
     };
     this.updateActividadesNombres();
   }
-   
-  
 
-  // Elimina una actividad por su clave
-removeRow(key: string): void {  
-  // Verificar si solo hay una actividad
-  if (Object.keys(this.proyecto.actividades).length <= 1) {
-    alert('No puedes eliminar la última actividad.');
-    return;
+  removeRow(key: string): void {
+    if (Object.keys(this.proyecto.actividades).length <= 1) {
+      alert('No puedes eliminar la última actividad.');
+      return;
+    }
+    delete this.proyecto.actividades[key];
+    this.updateActividadesNombres();
   }
 
-  // Eliminar la actividad y actualizar la lista
-  delete this.proyecto.actividades[key];
-  this.updateActividadesNombres();
-}
-
-
-  // Calcula el valor PERT para una actividad
   calculatePERT(actividad: Actividad, key: string): number {
-
-  const numero = (actividad.o + 4 * actividad.mp + actividad.p) / 6;
-  const decimales = 2;
-  const redondeado = Math.round(numero * Math.pow(10, decimales)) / Math.pow(10, decimales);
+    const numero = (actividad.o + 4 * actividad.mp + actividad.p) / 6;
+    const decimales = 2;
+    const redondeado = Math.round(numero * Math.pow(10, decimales)) / Math.pow(10, decimales);
     this.proyecto.actividades[key].pert = redondeado;
-    return this.proyecto.actividades[key].pert; 
+    return this.proyecto.actividades[key].pert;
   }
-  
 
-  // Manejo de precedentes en una actividad
   onPrecedentesChange(key: string, selected: string[]): void {
     this.proyecto.actividades[key].precedentes = selected;
     console.log(`Precedentes de ${key} actualizados:`, selected);
@@ -118,7 +94,7 @@ removeRow(key: string): void {
 
   saveData(): void {
     const actividades = Object.values(this.proyecto.actividades);
-    if (this.proyecto.nombre == null){
+    if (this.proyecto.nombre == null || this.proyecto.nombre === '') {
       alert('El nombre del proyecto no puede estar vacío.');
       return;
     }
@@ -131,20 +107,16 @@ removeRow(key: string): void {
         actividad.p === null ||
         actividad.p < 0
     );
-    
+
     if (invalidActividades.length > 0) {
       alert('Todos los campos deben tener valores válidos (mayores o iguales a 0).');
       return;
     }
-    this.editTableService.editTable(this.proyecto).subscribe((data: any) => {
-      alert('Actividad editada correctamente');
-      this.router.navigate(['/home' ]);
-    }
-    );
+    console.log('Datos editados del proyecto:', this.proyecto);
+    alert('Actividad editada correctamente');
+    this.router.navigate(['/home']);
   }
-  
 
-  // Alterna el estado de un precedente en la actividad
   togglePrecedente(actividad: Actividad, option: string): void {
     const index = actividad.precedentes.indexOf(option);
     if (index === -1) {
@@ -154,18 +126,7 @@ removeRow(key: string): void {
     }
   }
 
-  // Filtra las actividades para evitar precedentes circulares
   filteredActividades(key: string): string[] {
     return this.actividadesNombres.filter((nombre) => nombre !== key);
   }
-
-
-
-
-
-
-
-
-
 }
-

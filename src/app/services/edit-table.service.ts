@@ -4,6 +4,7 @@ import { API_ROUTES } from '../../API-Routes';
 import { HttpClient } from '@angular/common/http';
 import { Proyecto } from '../models/actividades';
 import { HttpHeaders } from '@angular/common/http';
+import { of, delay } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,14 +18,22 @@ export class EditTableService {
   id = localStorage.getItem('proyecto');
   
   editTable( data: Proyecto) {
-    console.log(this.id);
-    
-    return this.http.put(this.url + API_ROUTES.project.edit+this.id, data, { headers: this.headers });
+    console.log('Mock Editing Table for Project ID:', this.id, data);
+    return of({ message: 'Table updated successfully' }).pipe(delay(600));
   }
   
   
   getTable() {
-    console.log(this.id);
-    return this.http.get<any>(this.url + API_ROUTES.project.view+'/'+this.id, { headers: this.headers });
+    console.log('Mock Getting Table for Project ID:', this.id);
+    const mockProyecto: Proyecto = {
+      nombre: 'Proyecto de Construcción A',
+      actividades: {
+        'A': { o: 2, mp: 4, p: 6, pert: 4, precedentes: [] },
+        'B': { o: 3, mp: 5, p: 8, pert: 5.16, precedentes: ['A'] },
+        'C': { o: 1, mp: 2, p: 3, pert: 2, precedentes: ['A'] },
+        'D': { o: 4, mp: 6, p: 10, pert: 6.33, precedentes: ['B', 'C'] }
+      }
+    };
+    return of(mockProyecto).pipe(delay(500));
   }
 }
