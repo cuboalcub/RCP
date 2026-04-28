@@ -10,7 +10,7 @@ import { Location, CommonModule } from '@angular/common';
 })
 export class RcViewerComponent {
   nombre: string = localStorage.getItem('proyectoNombre') || "Proyecto de Construcción A";
-  url: string = "https://firebasestorage.googleapis.com/v0/b/roaau-javascript.appspot.com/o/imagenes%2Farbol_actividades_con_imagenes_matplotlib.png?alt=media&token=a84c4d7a-393a-456f-8cf1-fb1d0efd4172";
+  url: string = "/assets/critical_path_chart_premium_1775935768852.png";
   
   // Mock data para visualización premium
   nodosDetalle = [
